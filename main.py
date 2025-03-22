@@ -8,6 +8,9 @@ from app.trial import *
 
 import certifi
 
+# trial_limit = None 
+# st.session_state.trial_limit = trial_limit
+
 os.environ["SSL_CERT_FILE"] = certifi.where()
 
 st.set_page_config(page_title="KnowledgeBase RAG Agent :)", layout="wide")
@@ -17,12 +20,11 @@ st.title("KnowledgeBase RAG Agent :)")
 with st.sidebar.expander("Choose Model:"):
     selected_model = st.selectbox("Select Model", ["gemma2-9b-it", "llama3-8b-8192"])
     temperature = st.slider("Temperature", min_value=0.0,max_value=1.0,step=0.1)
-
-with st.sidebar.expander(f"Trial Left: {st.session_state.trial_limit}"):
-    if if_trial_available():
-        st.write(f"You have {st.session_state.trial_limit} documents left for processing.")
-    else:
-        st.warning("You have exhausted your trial limit.")
+if if_trial_available():
+    with st.sidebar.expander(f"Trial Left: {st.session_state.trial_limit}"):
+        st.write(f"You have {st.session_state.trial_limit} Query trials left to try")
+else:
+    with st.sidebar.expander(f"No trial Left, enter your own API key below 👇"):
         st.text_input("Enter your Groq API key to continue:")
         
     
