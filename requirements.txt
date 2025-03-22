@@ -1,17 +1,18 @@
-# python-dotenv
-# langchain.core==0.3.33
+python-dotenv
+langchain.core==0.3.33
 # langchain-openai==0.3.3 
-# langchain-community==0.3.16 
+langchain-community==0.3.16 
+langchain-text-splitters
 # langchain-huggingface
 
 # llama-index
 # llama-index-readers-web
-# google-generativeai
+google-generativeai
 # llama-index-llms-gemini
-# pypdf
+pypdf
 # IPython
 # llama-index-embeddings-gemini
-# streamlit
+streamlit
 # llama-index-llms-huggingface
 groq
 langchain-groq
