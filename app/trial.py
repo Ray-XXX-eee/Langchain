@@ -1,16 +1,13 @@
 import streamlit as st
 
-st.session_state.trial_limit = st.secrets["TRIALS"]
+if "trial_limit" not in st.session_state:
+    st.session_state.setdefault("trial_limit", int(st.secrets["TRIALS"]))
 
 def if_trial_available():
-    print("trial print : " + str(st.session_state.trial_limit))
-    if st.session_state.trial_limit > 0:
-        return True
-    else:
-        return False
+    print ("test limit print : "+ str(st.session_state.trial_limit))
+    return st.session_state.trial_limit > 0
 
 def trial_counter():
-    while st.session_state.trial_limit > 0:
+    if st.session_state.trial_limit > 0:
         st.session_state.trial_limit -= 1
-        return st.session_state.trial_limit
     
