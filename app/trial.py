@@ -1,9 +1,9 @@
-from app.config import TRIAL_LIMIT
 import streamlit as st
 
-st.session_state.trial_limit = TRIAL_LIMIT 
+st.session_state.trial_limit = st.secrets["TRIALS"]
 
 def if_trial_available():
+    print("trial print : " + str(st.session_state.trial_limit))
     if st.session_state.trial_limit > 0:
         return True
     else:
