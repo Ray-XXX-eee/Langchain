@@ -27,6 +27,8 @@ class SidebarUI:
             # Check if values have changed
             changes_made = (self.selected_model != previous_model) or (self.temperature != previous_temperature)
 
+            st.session_state.selected_model = self.selected_model
+            st.session_state.temperature = self.temperature
             # Display Submit button only if changes are detected
             if changes_made:
                 if st.button("➤"):
@@ -36,8 +38,9 @@ class SidebarUI:
 
                     # Hide the button by resetting `changes_made`
                     st.rerun()
+            print ("model name - ", st.session_state.selected_model,"temp - ",  st.session_state.temperature)
 
-        return self.selected_model, self.temperature
+        # return self.selected_model, self.temperature
 
     def display_trial_info(self, if_trial_available_func, trial_value):
         """Display trial usage information."""

@@ -23,7 +23,7 @@ def display_chat():
         unsafe_allow_html=True,
     )
 
-def chat_interface(selected_model, temperature):
+def chat_interface():
     """Handles user input, persists chat history, and triggers auto-scroll."""
     
     display_chat()  # Show previous messages
@@ -36,7 +36,9 @@ def chat_interface(selected_model, temperature):
             st.markdown(user_prompt)
 
         # Get response from LLM
-        inference_instance = Inference(llm_name=selected_model, temperature=temperature)
+        inference_instance = Inference(llm_name=st.session_state.selected_model, temperature=st.session_state.temperature)
+        
+        print("model name from chat.py- ", st.session_state.selected_model, "temp - ", st.session_state.temperature)
         response = inference_instance.answer_query(user_prompt=user_prompt)
         trial_counter()  # Deduct one trial if applicable
 

@@ -49,6 +49,6 @@ class MainUI:
             else:
                 st.error("Please select a document or upload one.")
 
-    def display_chat(self, selected_model, temperature):
+    def display_chat_comp(self):
         """Call chat interface from chat.py."""
-        chat_interface(selected_model, temperature)  # Calls the modular chat function
+        chat_interface()  # Calls the modular chat function

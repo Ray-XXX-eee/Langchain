@@ -8,7 +8,7 @@ from langchain.chains.retrieval import create_retrieval_chain
 
 class Inference:
     def __init__(self,llm_name:str, temperature:float):
-        self.llm_name = "gemma2-9b-it"
+        self.llm_name = llm_name
         self.temperature = temperature
     
     def get_llm(self):

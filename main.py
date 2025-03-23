@@ -20,7 +20,7 @@ st.title("KnowledgeBase RAG Agent :)")
 
 # Create UI objects
 sidebar_ui = SidebarUI()
-selected_model, temperature = sidebar_ui.choose_model()
+sidebar_ui.choose_model()
 sidebar_ui.display_trial_info(if_trial_available, st.session_state.trial_limit)
 
 
@@ -30,7 +30,7 @@ st.session_state["option"] = option
 main_ui.process_documents()
 
 # Display chat interface
-main_ui.display_chat(selected_model, temperature)
+main_ui.display_chat_comp()
 
 # Display document details in sidebar
 sidebar_ui.display_doc_details()
