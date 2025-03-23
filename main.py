@@ -17,8 +17,10 @@ st.set_page_config(page_title="KnowledgeBase RAG Agent :)", layout="wide")
 st.title("KnowledgeBase RAG Agent :)")
 
 # Sidebar: Model selection and pricing placeholder
+
 with st.sidebar.expander("Choose Model:"):
     selected_model = st.selectbox("Select Model", ["gemma2-9b-it", "llama3-8b-8192"])
+    temperature = 0.0
     temperature = st.slider("Temperature", min_value=0.0,max_value=1.0,step=0.1)
 if if_trial_available():
     with st.sidebar.expander(f"Trial Left: {st.session_state.trial_limit}"):
@@ -26,6 +28,8 @@ if if_trial_available():
 else:
     with st.sidebar.expander(f"No trial Left, enter your own API key below 👇",expanded=True):
         st.text_input("Enter your Groq API key here:")
+        
+    
 
 st.sidebar.markdown("[Upgrade for more features](#)")  # Hyperlink to future pricing page
 
@@ -33,13 +37,8 @@ st.sidebar.markdown("[Upgrade for more features](#)")  # Hyperlink to future pri
 DATA_DIR = "data"
 os.makedirs(DATA_DIR, exist_ok=True)
 
-# Show available documents
+# available documents
 existing_files = [f for f in os.listdir(DATA_DIR) if f.endswith(".pdf")]
-# st.subheader("Available Documents")
-# if existing_files:
-#     st.markdown("\n".join(f"- {file}" for file in existing_files))
-# else:
-#     st.write("No existing documents found in the 'data' folder.")
 
 # Option: Use existing or upload your own
 option = st.radio("Step 1 : Choose an option:", ("Use existing documents", "Upload your own"))
@@ -52,8 +51,12 @@ if option == "Upload your own":
             with open(file_path, "wb") as f:
                 f.write(uploaded_file.getbuffer())
         st.success("Uploaded files have been saved to the 'data' folder.")
-elif option == "Use existing documents" and existing_files:
-    selected_files = st.multiselect("Select available PDFs:", existing_files)
+elif option == "Use existing documents":
+    print(existing_files)
+    if len(existing_files) == 0:
+        st.warning("No existing PDFs to choose, upload a new one")
+    else :
+        selected_files = st.multiselect("Select available PDFs:", existing_files)
 else:
     selected_files = None
 
