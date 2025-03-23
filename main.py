@@ -10,7 +10,7 @@ import certifi
 
 # trial_limit = None 
 # st.session_state.trial_limit = trial_limit
-
+init_trial_state()
 os.environ["SSL_CERT_FILE"] = certifi.where()
 
 st.set_page_config(page_title="KnowledgeBase RAG Agent :)", layout="wide")
@@ -24,10 +24,8 @@ if if_trial_available():
     with st.sidebar.expander(f"Trial Left: {st.session_state.trial_limit}"):
         st.write(f"You have {st.session_state.trial_limit} Query trials left to try")
 else:
-    with st.sidebar.expander(f"No trial Left, enter your own API key below 👇"):
-        st.text_input("Enter your Groq API key to continue:")
-        
-    
+    with st.sidebar.expander(f"No trial Left, enter your own API key below 👇",expanded=True):
+        st.text_input("Enter your Groq API key here:")
 
 st.sidebar.markdown("[Upgrade for more features](#)")  # Hyperlink to future pricing page
 
